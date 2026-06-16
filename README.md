@@ -56,4 +56,4 @@ Scalar API docs available at `http://localhost:5188/scalar/v1`
 
 ## Author
 
-Jorge Bermúdez Trillo — [LinkedIn](https://www.linkedin.com/in/jorge-bermúdez-trillo)
+Jorge Bermúdez Trillo — [LinkedIn](https://www.linkedin.com/in/jorge-bermudez-trillo-/)
