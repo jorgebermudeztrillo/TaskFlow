@@ -30,8 +30,8 @@ namespace TaskFlow.API.Services
 
         public async Task<AuthResponseDto?> RegisterAsync(RegisterDto dto)
         {
-
-            if(await  _db.Users.AnyAsync(u=>u.Email== dto.Email)) return null;
+            if (await _db.Users.AnyAsync(u => u.Email == dto.Email))
+                return null;
 
             var user = new User
             {
@@ -41,7 +41,15 @@ namespace TaskFlow.API.Services
             };
 
             _db.Users.Add(user);
-            await _db.SaveChangesAsync();
+
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                return null;
+            }
 
             return new AuthResponseDto(GenerateToken(user), user.Name, user.Email);
         }
