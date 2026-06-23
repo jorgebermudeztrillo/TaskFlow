@@ -11,10 +11,11 @@ Fullstack task manager application built with ASP.NET Core 10, Entity Framework 
 - JWT Authentication
 - REST API
 
-**Frontend** *(in progress)*
-- Angular 17
+**Frontend**
+- Angular 22 (standalone components, signals)
 - Angular Material
-- CDK DragDrop
+- JWT interceptor + route guards
+- CDK DragDrop *(coming next)*
 
 ## Features
 
@@ -23,6 +24,7 @@ Fullstack task manager application built with ASP.NET Core 10, Entity Framework 
 - Kanban board with three columns (Pending, In Progress, Done)
 - Drag and drop tasks between columns
 - Each user only sees their own data
+- Functional login/register flow consuming the API
 
 ## Architecture
 Angular → HTTP + JWT → ASP.NET Core API → EF Core → SQL Server
