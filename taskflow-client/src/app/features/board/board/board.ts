@@ -65,6 +65,31 @@ export class Board implements OnInit {
     });
   }
 
+
+  deleteProject(projectId: number, event: Event): void {
+    event.stopPropagation();
+
+    this.projectService.delete(projectId).subscribe({
+      next: () => {
+        this.projects.update(list => list.filter(p => p.id !== projectId));
+      }
+    });
+  }
+
+  deleteTask(taskId: number, columnId: number): void {
+    this.taskService.delete(taskId).subscribe({
+      next: () => {
+        this.columns.update(cols =>
+          cols.map(col =>
+            col.id === columnId
+              ? { ...col, tasks: col.tasks.filter(t => t.id !== taskId) }
+              : col
+          )
+        );
+      }
+    });
+  }
+
   constructor(
     private projectService: ProjectService,
     private taskService: TaskService,

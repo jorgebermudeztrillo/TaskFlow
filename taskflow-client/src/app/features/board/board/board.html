@@ -29,6 +29,9 @@
       <mat-card class="project-card" (click)="selectProject(project)">
         <mat-card-title>{{ project.name }}</mat-card-title>
         <mat-card-content>{{ project.description }}</mat-card-content>
+        <button mat-icon-button class="delete-project-btn" (click)="deleteProject(project.id, $event)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-card>
       }
     </div>
@@ -58,6 +61,9 @@
           <mat-card class="task-card" cdkDrag>
             <mat-card-title>{{ task.title }}</mat-card-title>
             <mat-card-content>{{ task.description }}</mat-card-content>
+            <button mat-icon-button class="delete-task-btn" (click)="deleteTask(task.id, column.id)">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-card>
           }
         </div>
