@@ -1,5 +1,7 @@
 # TaskFlow
 
+![TaskFlow Demo](Animation.gif)
+
 Fullstack task manager application built with ASP.NET Core 10, Entity Framework Core, Angular 22 and JWT Authentication.
 
 ## Tech Stack
