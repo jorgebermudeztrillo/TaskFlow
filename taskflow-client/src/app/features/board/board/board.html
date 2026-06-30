@@ -1,1 +1,82 @@
-<p>board works!</p>
+<div class="board-page">
+  <header class="board-header">
+    <h1>TaskFlow</h1>
+    <div class="header-right">
+      <span>{{ authService.currentUser()?.name }}</span>
+      <button mat-stroked-button (click)="logout()">Cerrar sesión</button>
+    </div>
+  </header>
+
+  @if (!selectedProject()) {
+  <div class="projects-view">
+    <div class="projects-header">
+      <h2>Mis proyectos</h2>
+      <button mat-flat-button color="primary" (click)="showNewProjectForm = !showNewProjectForm">
+        + Nuevo proyecto
+      </button>
+    </div>
+
+    @if (showNewProjectForm) {
+    <mat-card class="new-project-form">
+      <input [(ngModel)]="newProjectName" placeholder="Nombre del proyecto" class="input-field">
+      <input [(ngModel)]="newProjectDescription" placeholder="Descripción" class="input-field">
+      <button mat-flat-button color="primary" (click)="createProject()">Crear</button>
+    </mat-card>
+    }
+
+    <div class="projects-grid">
+      @for (project of projects(); track project.id) {
+      <mat-card class="project-card" (click)="selectProject(project)">
+        <mat-card-title>{{ project.name }}</mat-card-title>
+        <mat-card-content>{{ project.description }}</mat-card-content>
+      </mat-card>
+      }
+    </div>
+
+    @if (projects().length === 0) {
+    <p class="empty-state">No tienes proyectos todavía. Crea el primero.</p>
+    }
+  </div>
+  } @else {
+  <div class="kanban-view">
+    <button mat-button (click)="backToProjects()">← Volver a proyectos</button>
+    <h2>{{ selectedProject()?.name }}</h2>
+
+    <div class="kanban-columns">
+      @for (column of columns(); track column.id) {
+      <div class="kanban-column">
+        <h3>{{ column.name }}</h3>
+
+        <div class="drop-zone"
+             cdkDropList
+             [cdkDropListData]="column.tasks"
+             [cdkDropListConnectedTo]="dropListIds()"
+             [id]="'column-' + column.id"
+             (cdkDropListDropped)="onTaskDrop($event, column.id)">
+
+          @for (task of column.tasks; track task.id) {
+          <mat-card class="task-card" cdkDrag>
+            <mat-card-title>{{ task.title }}</mat-card-title>
+            <mat-card-content>{{ task.description }}</mat-card-content>
+          </mat-card>
+          }
+        </div>
+
+        @if (addingTaskToColumn === column.id) {
+        <div class="task-form">
+          <input [(ngModel)]="newTaskTitle" placeholder="Título" class="input-field">
+          <input [(ngModel)]="newTaskDescription" placeholder="Descripción" class="input-field">
+          <div class="task-form-actions">
+            <button mat-flat-button color="primary" (click)="createTask(column.id)">Añadir</button>
+            <button mat-button (click)="cancelTaskForm()">Cancelar</button>
+          </div>
+        </div>
+        } @else {
+        <button mat-button class="add-task-btn" (click)="openTaskForm(column.id)">+ Añadir tarea</button>
+        }
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>
