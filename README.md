@@ -1,6 +1,6 @@
 # TaskFlow
 
-Fullstack task manager application built with ASP.NET Core 10, Entity Framework Core, Angular 17 and JWT Authentication.
+Fullstack task manager application built with ASP.NET Core 10, Entity Framework Core, Angular 22 and JWT Authentication.
 
 ## Tech Stack
 
@@ -14,17 +14,16 @@ Fullstack task manager application built with ASP.NET Core 10, Entity Framework 
 **Frontend**
 - Angular 22 (standalone components, signals)
 - Angular Material
+- Angular CDK Drag & Drop
 - JWT interceptor + route guards
-- CDK DragDrop *(coming next)*
 
 ## Features
 
 - User registration and login with JWT
 - Create and manage projects
 - Kanban board with three columns (Pending, In Progress, Done)
-- Drag and drop tasks between columns
+- Drag and drop tasks between columns with persistence
 - Each user only sees their own data
-- Functional login/register flow consuming the API
 
 ## Architecture
 Angular → HTTP + JWT → ASP.NET Core API → EF Core → SQL Server
@@ -38,9 +37,16 @@ dotnet restore
 dotnet ef database update
 dotnet run
 ```
-
 API runs on `http://localhost:5188`
 Scalar API docs available at `http://localhost:5188/scalar/v1`
+
+**Frontend**
+```bash
+cd taskflow-client
+npm install
+ng serve
+```
+App runs on `http://localhost:4200`
 
 ## API Endpoints
 
@@ -58,4 +64,4 @@ Scalar API docs available at `http://localhost:5188/scalar/v1`
 
 ## Author
 
-Jorge Bermúdez Trillo — [LinkedIn](https://www.linkedin.com/in/jorge-bermudez-trillo-/)
+Jorge Bermúdez Trillo — [LinkedIn](https://www.linkedin.com/in/jorge-bermúdez-trillo)
